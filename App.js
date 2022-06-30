@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 export default function App() {
   const [people, setPeople] = useState([
@@ -12,14 +18,23 @@ export default function App() {
     { name: "bowser", id: "7" },
   ]);
 
+  const pressHandler = (id) => {
+    console.log(id);
+    setPeople((prevPeople) => {
+      return prevPeople.filter((person) => person.id != id);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-      numColumns={2}
+        numColumns={2}
         data={people}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Text style={styles["item"]}>{item.name}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.id)}>
+            <Text style={styles["item"]}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -34,7 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   item: {
-    flex: 1,
     marginHorizontal: 10,
     marginTop: 24,
     padding: 30,
