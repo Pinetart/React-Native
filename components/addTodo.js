@@ -22,7 +22,9 @@ const AddTodo = ({ submitHandler }) => {
         color="coral"
         onPress={() => {
           submitHandler(text);
-          setText("");
+          if (text.length > 3) {
+            setText("");
+          }
         }}
       />
       {/* <TouchableOpacity
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
-    outlineStyle: "none",
+    // outlineStyle: "none",
   },
 });
 export default AddTodo;
