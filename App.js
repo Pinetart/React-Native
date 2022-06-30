@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AddTodo from "./components/addTodo";
 import Header from "./components/header";
+import Sandbox from "./components/sandbox";
 import TodoItem from "./components/todoItem";
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
   };
 
   return (
+    // <Sandbox />
     <TouchableWithoutFeedback
       onPress={() => {
         Keyboard.dismiss();
@@ -48,6 +50,7 @@ export default function App() {
           <AddTodo submitHandler={submitHandler} />
           <View style={styles.list}>
             <FlatList
+              style={styles["flist"]}
               data={todos}
               renderItem={({ item }) => (
                 <TodoItem item={item} pressHandler={pressHandler} />
@@ -66,9 +69,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   content: {
+    flex: 1,
     padding: 40,
   },
   list: {
+    flex: 1,
     marginTop: 20,
+  },
+  flist: {
+    paddingHorizontal: 20,
   },
 });
