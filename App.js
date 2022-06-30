@@ -1,26 +1,33 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
   const [name, setName] = useState("Shaun");
-  const [person, setPerson] = useState({ name: "Mario", age: 40 });
-
-  const clickHandler = () => {
-    name === "Shaun" ? setName("chun-li") : setName("Shaun");
-    person.name === "Mario"
-      ? setPerson({ name: "Luigi", age: 45 })
-      : setPerson({ name: "Mario", age: 40 });
-  };
+  const [age, setAge] = useState(30);
 
   return (
     <View style={styles.container}>
-      <Text>My name is {name}</Text>
+      <Text>Enter name:</Text>
+      <TextInput
+        multiline
+        style={styles["input"]}
+        placeholder="e.g John Doe"
+        onChangeText={(value) => {
+          setName(value);
+        }}
+      />
+      <Text>Enter age:</Text>
+      <TextInput
+        keyboardType="numeric"
+        style={styles["input"]}
+        placeholder="e.g 99"
+        onChangeText={(value) => {
+          setAge(value);
+        }}
+      />
       <Text>
-        His name is {person.name} and he is {person.age} years old
+        name: {name}, age: {age}
       </Text>
-      <View style={styles["buttonContainer"]}>
-        <Button title="Update Name" onPress={clickHandler} />
-      </View>
     </View>
   );
 }
@@ -32,7 +39,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  buttonContainer: {
-    marginTop: 20,
+  input: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
+    borderRadius: 5,
   },
 });
